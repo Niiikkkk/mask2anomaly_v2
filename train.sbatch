@@ -7,8 +7,8 @@
 #SBATCH --mail-user=s319439@studenti.polito.it
 #SBATCH --mail-type=END
 #SBATCH --partition=cuda
-#SBATCH --output=/home/nberardo/mask2anomaly_v2/train.log
-#SBATCH --error=/home/nberardo/mask2anomaly_v2/train.err
+#SBATCH --output=/home/nberardo/mask2anomaly_v2/train_vicreg.log
+#SBATCH --error=/home/nberardo/mask2anomaly_v2/train_vicreg.err
 ###### 1 Load the module
 module load nvidia/cudasdk
 module load intel/python/3
