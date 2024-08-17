@@ -1,5 +1,5 @@
 _BASE_: Base-Cityscapes-SemanticSegmentation.yaml
-OUTPUT_DIR: "/home/shyam/Mask2Anomaly/output/m2unk_coco_supervised_v1/" #Change Path
+OUTPUT_DIR: "/home/nberardo/mask2anomaly_v2/output/m2unk_coco_supervised_v1/" #Change Path
 SOLVER:
   IMS_PER_BATCH: 8
   BASE_LR: 0.00001
@@ -11,7 +11,7 @@ INPUT:
 MODEL:
   BACKBONE:
      FREEZE_AT: 5
-  WEIGHTS: "/home/shyam/Mask2Former/output/xl-fl/bt-f-xl.pth" #Change Path
+  WEIGHTS: "/home/nberardo/mask2anomaly_v2/output/xl-fl/bt-f-xl.pth" #Change Path
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"

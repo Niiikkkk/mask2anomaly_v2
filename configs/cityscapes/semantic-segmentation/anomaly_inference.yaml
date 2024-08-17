@@ -1,6 +1,6 @@
 _BASE_: Base-Cityscapes-SemanticSegmentation.yaml
 MODEL:
-  WEIGHTS: "/home/shyam/Mask2Former/output/m2unk_coco_supervised_v1/best_contrastive.pth" #Change_Path
+  WEIGHTS: "/home/nberardo/mask2anomaly_v2/m2unk_coco_supervised_v1/best_contrastive.pth" #Change_Path
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"
