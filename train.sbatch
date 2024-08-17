@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --gres=gpu:1
-#SBATCH --job-name=mask2anomaly
+#SBATCH --job-name=m2a_vicreg
 #SBATCH --mail-user=s319439@studenti.polito.it
 #SBATCH --mail-type=END
 #SBATCH --partition=cuda
