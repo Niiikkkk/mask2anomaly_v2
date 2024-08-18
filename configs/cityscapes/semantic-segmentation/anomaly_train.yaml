@@ -10,6 +10,7 @@ MODEL:
   BACKBONE:
      FREEZE_AT: 5
   WEIGHTS: "/home/nberardo/vicreg/experiment/resnet50.pth"
+  #WEIGHTS: "/home/nberardo/simsiam/experiment/resnet50.pth"
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"
