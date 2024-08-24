@@ -1,6 +1,7 @@
 # Copyright (c) Facebook, Inc. and its affiliates.
 import copy
 import logging
+import sys
 
 import numpy as np
 import torch
@@ -139,6 +140,8 @@ class MaskFormerSemanticDatasetMapper:
         self.is_ood_ft = is_ood_ft
         self.anomaly_mix_ratio = anomaly_mix_ratio
         self.anomaly_file_path = [anomaly_file_path]
+        print(self.anomaly_file_path)
+        sys.stdout.flush()
         self.gt_list = glob.glob(self.anomaly_file_path)
 
         logger = logging.getLogger(__name__)
