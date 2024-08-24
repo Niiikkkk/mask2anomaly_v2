@@ -9,8 +9,8 @@ INPUT:
 MODEL:
   BACKBONE:
      FREEZE_AT: 5
-  WEIGHTS: "/home/nberardo/vicreg/experiment/resnet50.pkl"
-  #WEIGHTS: "/home/nberardo/simsiam/experiment/resnet50.pth"
+  WEIGHTS: "/home/nberardo/mask2anomaly_v2/backbone_weights/vicreg_resnet50.pkl"
+  #WEIGHTS: "/home/nberardo/simsiam/experiment/resnet50.pkl"
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"
