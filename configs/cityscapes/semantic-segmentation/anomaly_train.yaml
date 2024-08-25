@@ -1,5 +1,5 @@
 _BASE_: Base-Cityscapes-SemanticSegmentation.yaml
-OUTPUT_DIR: "/home/nberardo/mask2anomaly_v2/output/base-exp/" #Change Path
+OUTPUT_DIR: "/home/nberardo/mask2anomaly_v2/output/base-exp/simsiam/" #Change Path
 SOLVER:
   MAX_ITER: 90000
   CHECKPOINT_PERIOD: 45000 ## Added Here 
@@ -9,8 +9,8 @@ INPUT:
 MODEL:
   BACKBONE:
      FREEZE_AT: 5
-  WEIGHTS: "/home/nberardo/mask2anomaly_v2/backbone_weights/vicreg_resnet50.pkl"
-  #WEIGHTS: "/home/nberardo/simsiam/experiment/resnet50.pkl"
+  #WEIGHTS: "/home/nberardo/mask2anomaly_v2/backbone_weights/vicreg_resnet50.pkl"
+  WEIGHTS: /home/nberardo/mask2anomaly_v2/backbone_weights/simsiam_resnet50.pkl
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"
