@@ -120,6 +120,9 @@ if __name__ == "__main__":
         open(file_path, 'w').close()
     file = open(file_path, 'a')
 
+    # ADDED BY ME
+    file.write(args.input.split('/')[4] + '\n')
+
 
     
     cfg = setup_cfg(args)
@@ -131,10 +134,6 @@ if __name__ == "__main__":
 
     if args.input:
         for path in glob.glob(os.path.expanduser(str(args.input[0]))):
-
-            #ADDED BY ME
-            file.write(path.split('/')[3] + '\n')
-
 
             img = read_image(path, format="BGR")
             start_time = time.time()
