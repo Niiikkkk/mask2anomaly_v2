@@ -1,7 +1,7 @@
 _BASE_: Base-Cityscapes-SemanticSegmentation.yaml
 OUTPUT_DIR: "/home/nberardo/mask2anomaly_v2/output/eval/vicreg/" #Change_Path
 MODEL:
-  WEIGHTS: "/home/nberardo/mask2anomaly_v2/m2unk_coco_supervised_v1/vicreg/model_final.pth" #Change_Path
+  WEIGHTS: "/home/nberardo/mask2anomaly_v2/output/m2unk_coco_supervised_v1/vicreg/model_final.pth" #Change_Path
   META_ARCHITECTURE: "MaskFormer"
   RESNETS:
     NORM: "BN"
