@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     file_path = os.path.join(args.output, 'results.txt')
     
-    if not os.path.exists('results.txt'):
+    if not os.path.exists(file_path):
         open(file_path, 'w').close()
     file = open(file_path, 'a')
 
