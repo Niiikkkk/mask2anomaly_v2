@@ -7,8 +7,8 @@
 #SBATCH --mail-user=s319439@studenti.polito.it
 #SBATCH --mail-type=END
 #SBATCH --partition=cuda
-#SBATCH --output=/home/nberardo/mask2anomaly_v2/train_vicreg.log
-#SBATCH --error=/home/nberardo/mask2anomaly_v2/train_vicreg.err
+#SBATCH --output=/home/nberardo/mask2anomaly_v2_v2/train_vicreg.log
+#SBATCH --error=/home/nberardo/mask2anomaly_v2_v2/train_vicreg.err
 ###### 1 Load the module
 module load nvidia/cudasdk
 module load intel/python/3
@@ -20,10 +20,22 @@ export DETECTRON2_DATASETS=/home/nberardo/Datasets
 export CUDA_HOME=/home/nberardo/cuda_11.8
 
 #convert pth weights to pkl
-#python tools/convert-torchvision-to-d2.py /home/nberardo/mask2anomaly_v2/backbone_weights/vicreg_resnet50_top.pth /home/nberardo/mask2anomaly_v2/backbone_weights/vicreg_resnet50_top.pkl
+#python tools/convert-torchvision-to-d2.py /home/nberardo/mask2anomaly_v2_v2/backbone_weights/vicreg_resnet50_top.pth /home/nberardo/mask2anomaly_v2_v2/backbone_weights/vicreg_resnet50_top.pkl
 
 #train on the pkl weights
 #CUDA_VISIBLE_DEVICES=1 python train_net.py --num-gpus 1 --config-file configs/cityscapes/semantic-segmentation/anomaly_train.yaml
 
 #fine-tune
-CUDA_VISIBLE_DEVICES=1 python train_net.py --num-gpus 1 --config-file configs/cityscapes/semantic-segmentation/anomaly_ft.yaml
+#CUDA_VISIBLE_DEVICES=1 python train_net.py --num-gpus 1 --config-file configs/cityscapes/semantic-segmentation/anomaly_ft.yaml
+
+## Anomaly Inference SET THE PATHS
+#RoadAnomaly21
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly21/images/*.png' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
+#RoadObsticle21
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadObsticle21/images/*.webp' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
+#FS L&F val
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/FS_LostFound_full/images/*.png' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
+# FS-Static
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/fs_static/images/*.jpg' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
+#RoadAnomaly
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly/images/*.jpg' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
