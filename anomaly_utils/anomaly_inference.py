@@ -121,7 +121,7 @@ if __name__ == "__main__":
     file = open(file_path, 'a')
 
     # ADDED BY ME
-    file.write(args.input.split('/')[4] + '\n')
+    file.write(args.input[0].split('/')[4] + '\n')
 
 
     
