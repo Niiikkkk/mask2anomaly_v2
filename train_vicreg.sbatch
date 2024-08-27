@@ -16,8 +16,8 @@ module load intel/python/3
 source /home/nberardo/myenv/bin/activate
 # 3 Run the python script
 
-export DETECTRON2_DATASETS=/home/nberardo/Datasets
-export CUDA_HOME=/home/nberardo/cuda_11.8
+#export DETECTRON2_DATASETS=/home/nberardo/Datasets
+#export CUDA_HOME=/home/nberardo/cuda_11.8
 
 #convert pth weights to pkl
 #python tools/convert-torchvision-to-d2.py /home/nberardo/mask2anomaly_v2_v2/backbone_weights/vicreg_resnet50_top.pth /home/nberardo/mask2anomaly_v2_v2/backbone_weights/vicreg_resnet50_top.pkl
@@ -30,7 +30,7 @@ export CUDA_HOME=/home/nberardo/cuda_11.8
 
 ## Anomaly Inference
 #RoadAnomaly21
-python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly21/images/*.png' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly21/images/*.png' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
 #RoadObsticle21
 #CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadObsticle21/images/*.webp' --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'
 #FS L&F val
