@@ -198,6 +198,7 @@ class MaskFormerSemanticDatasetMapper:
 
         dataset_dict = copy.deepcopy(dataset_dict)  # it will be modified by code below
         image = utils.read_image(dataset_dict["file_name"], format=self.img_format)
+        image.setflags(write=1)
         utils.check_image_size(dataset_dict, image)
 
         if "sem_seg_file_name" in dataset_dict:
@@ -212,6 +213,7 @@ class MaskFormerSemanticDatasetMapper:
                     dataset_dict["file_name"]
                 )
             )
+        sem_seg_gt.setflags(write=1)
 
         #Anomaly Mix#
         if self.is_ood_ft: 
@@ -220,7 +222,9 @@ class MaskFormerSemanticDatasetMapper:
                 coco_img_path = coco_gt_path.replace('ood_annotations','images')
                 coco_img_path = coco_img_path.replace('png','jpg')
                 coco_img = utils.read_image(coco_img_path, format=self.img_format)
+                coco_img.setflags(write=1)
                 coco_gt = utils.read_image(coco_gt_path).astype("double")
+                coco_gt.setflags(write=1)
                 image, sem_seg_gt = mix_object(current_labeled_image=image, current_labeled_mask=sem_seg_gt, cut_object_image=coco_img, cut_object_mask=coco_gt)
 
         aug_input = T.AugInput(image, sem_seg=sem_seg_gt)
