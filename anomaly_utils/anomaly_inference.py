@@ -119,6 +119,8 @@ if __name__ == "__main__":
     if not os.path.exists('results.txt'):
         open(file_path, 'w').close()
     file = open(file_path, 'a')
+
+
     
     cfg = setup_cfg(args)
     demo = VisualizationDemo(cfg)
@@ -129,6 +131,11 @@ if __name__ == "__main__":
 
     if args.input:
         for path in glob.glob(os.path.expanduser(str(args.input[0]))):
+
+            #ADDED BY ME
+            file.write(path.split('/')[3] + '\n')
+
+
             img = read_image(path, format="BGR")
             start_time = time.time()
             
@@ -190,11 +197,11 @@ if __name__ == "__main__":
                 pathGT = path.replace("images", "labels_masks")                
 
                 if "RoadObsticle21" in pathGT:
-                   pathGT = pathGT.replace("webp", "png")
+                    pathGT = pathGT.replace("webp", "png")
                 if "fs_static" in pathGT:
-                   pathGT = pathGT.replace("jpg", "png")                
+                    pathGT = pathGT.replace("jpg", "png")
                 if "RoadAnomaly" in pathGT:
-                   pathGT = pathGT.replace("jpg", "png")  
+                    pathGT = pathGT.replace("jpg", "png")
 
                 mask = Image.open(pathGT)
                 ood_gts = np.array(mask)
