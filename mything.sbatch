@@ -21,7 +21,7 @@ export CUDA_HOME=/home/nberardo/cuda_11.8
 
 CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly/images/0.png'\
  --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'\
- --output '/home/nberardo/mask2anomaly_v2/result.txt'
+ --output '/home/nberardo/mask2anomaly_v2/'
 
 #convert pth weights to pkl
 #python tools/convert-torchvision-to-d2.py /home/nberardo/mask2anomaly_v2/backbone_weights/bt_resnet50_1000_epochs.pth /home/nberardo/mask2anomaly_v2/backbone_weights/bt_resnet50_1000_epochs.pkl
