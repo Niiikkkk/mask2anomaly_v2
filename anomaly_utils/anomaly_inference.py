@@ -223,7 +223,7 @@ if __name__ == "__main__":
 
     file.write( "\n")
     ood_gts = np.array(ood_gts_list)
-    print(odd_gts[0].shape)
+    print(ood_gts[0].shape)
     anomaly_scores = np.array(anomaly_score_list)
     print(anomaly_scores[0].shape)
     # drop void pixels
