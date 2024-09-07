@@ -24,7 +24,6 @@ import tqdm
 import torch.nn as nn
 import math
 
-import seaborn as sns
 import matplotlib.pylab as plt
 from matplotlib import cm
 
@@ -40,7 +39,6 @@ from demo.predictor import VisualizationDemo
 from torch.autograd import Variable
 from matplotlib import pyplot
 from torchvision.utils import save_image
-import kornia as K
 
 from sklearn.metrics import roc_auc_score, roc_curve, auc, precision_recall_curve, average_precision_score
 seed = 42
@@ -121,7 +119,7 @@ if __name__ == "__main__":
     file = open(file_path, 'a')
 
     # ADDED BY ME
-    file.write(args.input[0].split('/')[4] + '\n')
+    file.write(args.input[0].split('/')[4])
 
 
     
@@ -225,7 +223,9 @@ if __name__ == "__main__":
 
     file.write( "\n")
     ood_gts = np.array(ood_gts_list)
+    print(odd_gts[0].shape)
     anomaly_scores = np.array(anomaly_score_list)
+    print(anomaly_scores[0].shape)
     # drop void pixels
     ood_mask = (ood_gts == 1)
     ind_mask = (ood_gts == 0)
@@ -248,5 +248,5 @@ if __name__ == "__main__":
     print(f'AUPRC score: {prc_auc}')
     print(f'FPR@TPR95: {fpr}')
 
-    file.write(('AUPRC score:' + str(prc_auc) + '   FPR@TPR95:' + str(fpr) ))
+    file.write(('AUPRC score:' + str(prc_auc) + '   FPR@TPR95:' + str(fpr) + '\n'))
     file.close()
