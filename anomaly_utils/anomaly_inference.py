@@ -215,6 +215,8 @@ if __name__ == "__main__":
                     ood_gts = np.where((ood_gts<20), 0, ood_gts)
                     ood_gts = np.where((ood_gts==255), 1, ood_gts)
 
+                print(np.unique(ood_gts))
+
                 if 1 not in np.unique(ood_gts):
                     continue              
                 else:
