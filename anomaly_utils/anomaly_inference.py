@@ -129,15 +129,8 @@ if __name__ == "__main__":
     anomaly_score_list = []
     ood_gts_list = []
 
-    print("Before input")
-    sys.stdout.flush()
 
     if args.input:
-
-        print("After input")
-        sys.stdout.flush()
-
-        print(glob.glob(os.path.expanduser(args.input[0])))
 
         for path in glob.glob(os.path.expanduser(args.input[0])):
 
@@ -162,12 +155,11 @@ if __name__ == "__main__":
             )
             
 
-            print("Berfore output")
-            sys.stdout.flush()
+
             if args.output:
 
-                print("After output")
-                sys.stdout.flush()
+
+
 
                 if os.path.isdir(args.output):
                     assert os.path.isdir(args.output), args.output
@@ -227,7 +219,6 @@ if __name__ == "__main__":
                     ood_gts = np.where((ood_gts<20), 0, ood_gts)
                     ood_gts = np.where((ood_gts==255), 1, ood_gts)
 
-                print("CIAOOOO")
                 print(np.unique(ood_gts))
                 sys.stdout.flush()
 
