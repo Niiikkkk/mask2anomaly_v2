@@ -137,9 +137,9 @@ if __name__ == "__main__":
         print("After input")
         sys.stdout.flush()
 
-        print(args.input[0])
+        print(glob.glob(args.input[0]))
 
-        for path in glob.glob(str(args.input[0])):
+        for path in glob.glob(args.input[0]):
 
             img = read_image(path, format="BGR")
             start_time = time.time()
