@@ -129,8 +129,14 @@ if __name__ == "__main__":
     anomaly_score_list = []
     ood_gts_list = []
 
+    print("Before input")
+    sys.stdout.flush()
 
     if args.input:
+
+        print("After input")
+        sys.stdout.flush()
+
         for path in glob.glob(os.path.expanduser(str(args.input[0]))):
 
             img = read_image(path, format="BGR")
