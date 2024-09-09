@@ -139,7 +139,7 @@ if __name__ == "__main__":
 
         print(glob.glob(os.path.expanduser(args.input[0])))
 
-        for path in glob.glob(args.input[0]):
+        for path in glob.glob(os.path.expanduser(args.input[0])):
 
             img = read_image(path, format="BGR")
             start_time = time.time()
