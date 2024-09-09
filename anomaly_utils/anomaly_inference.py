@@ -231,8 +231,11 @@ if __name__ == "__main__":
     file.write( "\n")
     ood_gts = np.array(ood_gts_list)
     print(ood_gts[0].shape)
+    print(np.unique(ood_gts[0]))
     anomaly_scores = np.array(anomaly_score_list)
     print(anomaly_scores[0].shape)
+    print(np.unique(anomaly_scores[0]))
+
     # drop void pixels
     ood_mask = (ood_gts == 1)
     ind_mask = (ood_gts == 0)
