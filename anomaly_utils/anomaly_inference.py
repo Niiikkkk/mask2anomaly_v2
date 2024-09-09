@@ -137,7 +137,7 @@ if __name__ == "__main__":
         print("After input")
         sys.stdout.flush()
 
-        print(glob.glob(args.input[0]))
+        print(glob.glob(os.path.expanduser(args.input[0])))
 
         for path in glob.glob(args.input[0]):
 
