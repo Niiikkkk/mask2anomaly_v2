@@ -160,8 +160,12 @@ if __name__ == "__main__":
             )
             
 
-
+            print("Berfore output")
+            sys.stdout.flush()
             if args.output:
+
+                print("After output")
+                sys.stdout.flush()
 
                 if os.path.isdir(args.output):
                     assert os.path.isdir(args.output), args.output
