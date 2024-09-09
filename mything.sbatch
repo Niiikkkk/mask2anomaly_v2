@@ -19,7 +19,7 @@ source /home/nberardo/myenv/bin/activate
 export DETECTRON2_DATASETS=/home/nberardo/Datasets
 export CUDA_HOME=/home/nberardo/cuda_11.8
 
-CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly/images/0.png'\
+CUDA_VISIBLE_DEVICES=1 python anomaly_utils/anomaly_inference.py --input '/home/nberardo/Datasets/RoadAnomaly/images/0.jpg'\
  --config-file '/home/nberardo/mask2anomaly_v2/configs/cityscapes/semantic-segmentation/anomaly_inference.yaml'\
  --output '/home/nberardo/mask2anomaly_v2/'
 
