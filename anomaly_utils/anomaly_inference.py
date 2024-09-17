@@ -166,7 +166,8 @@ if __name__ == "__main__":
                 #     out_filename = args.output
 
                 predictions_naa =  predictions_na["sem_seg"].unsqueeze(0)
-                outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
+                # outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
+                outputs_na = torch.max(predictions_naa[0:19, :, :], axis=1)[0]
                 if predictions_na["sem_seg"][19:,:,:].shape[0] > 1:
                     outputs_na_mask = torch.max(predictions_na["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_na_mask[outputs_na_mask < 0.5] = 0
@@ -179,7 +180,8 @@ if __name__ == "__main__":
 
                 #left-right
                 predictions_lrr =  predictions_lr["sem_seg"].unsqueeze(0)
-                outputs_lr = 1 - torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
+                # outputs_lr = 1 - torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
+                outputs_lr = torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
                 if predictions_lr["sem_seg"][19:,:,:].shape[0] > 1:
                     outputs_lr_mask = torch.max(predictions_lr["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_lr_mask[outputs_lr_mask < 0.5] = 0
