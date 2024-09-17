@@ -193,7 +193,8 @@ if __name__ == "__main__":
                 outputs_lr = np.flip(outputs_lr.squeeze(), 1)
 
                 
-                outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
+                # outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
+                outputs = np.expand_dims(outputs_na, 0).astype(np.float32)
                 pathGT = path.replace("images", "labels_masks")                
 
                 if "RoadObsticle21" in pathGT:
