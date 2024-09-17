@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     if args.input:
 
-        for path in glob.glob(os.path.expanduser(args.input[0])):
+        for n, path in enumerate(glob.glob(os.path.expanduser(args.input[0]))):
 
             img = read_image(path, format="BGR")
             start_time = time.time()
@@ -143,6 +143,10 @@ if __name__ == "__main__":
             
             predictions_na, _ = demo.run_on_image(img)
             predictions_lr, _ = demo.run_on_image(img_lr)
+
+            if n == 0:
+                print(predictions_na)
+
 
             logger.info(
                 "{}: {} in {:.2f}s".format(
@@ -166,10 +170,8 @@ if __name__ == "__main__":
                 #     out_filename = args.output
 
                 predictions_naa =  predictions_na["sem_seg"].unsqueeze(0)
-                # outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
-                outputs_na = torch.max(predictions_naa[0:19, :, :], axis=1)[0]
+                outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
                 if predictions_na["sem_seg"][19:,:,:].shape[0] > 1:
-                    print("OK")
                     outputs_na_mask = torch.max(predictions_na["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_na_mask[outputs_na_mask < 0.5] = 0
                     outputs_na_mask[outputs_na_mask >= 0.5] = 1
@@ -181,8 +183,7 @@ if __name__ == "__main__":
 
                 #left-right
                 predictions_lrr =  predictions_lr["sem_seg"].unsqueeze(0)
-                # outputs_lr = 1 - torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
-                outputs_lr = torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
+                outputs_lr = 1 - torch.max(predictions_lrr[0:19,:,:], axis = 1)[0]
                 if predictions_lr["sem_seg"][19:,:,:].shape[0] > 1:
                     outputs_lr_mask = torch.max(predictions_lr["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_lr_mask[outputs_lr_mask < 0.5] = 0
@@ -194,8 +195,7 @@ if __name__ == "__main__":
                 outputs_lr = np.flip(outputs_lr.squeeze(), 1)
 
                 
-                # outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
-                outputs = np.expand_dims(outputs_na, 0).astype(np.float32)
+                outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
                 pathGT = path.replace("images", "labels_masks")                
 
                 if "RoadObsticle21" in pathGT:
