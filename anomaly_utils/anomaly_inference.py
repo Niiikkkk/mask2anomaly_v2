@@ -246,8 +246,6 @@ if __name__ == "__main__":
     val_out = np.concatenate((ind_out, ood_out))
     val_label = np.concatenate((ind_label, ood_label))
 
-    print(np.unique(val_label))
-
     fpr, tpr, _ = roc_curve(val_label, val_out)    
     roc_auc = auc(fpr, tpr)
     prc_auc = average_precision_score(val_label, val_out)
