@@ -144,6 +144,8 @@ if __name__ == "__main__":
             predictions_na, _ = demo.run_on_image(img)
             predictions_lr, _ = demo.run_on_image(img_lr)
 
+            print(predictions_na)
+
 
             logger.info(
                 "{}: {} in {:.2f}s".format(
@@ -159,8 +161,7 @@ if __name__ == "__main__":
 
             if args.output:
 
-
-
+                print("OK")
 
                 # if os.path.isdir(args.output):
                 #     assert os.path.isdir(args.output), args.output
