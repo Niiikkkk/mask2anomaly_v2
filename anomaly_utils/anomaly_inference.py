@@ -161,8 +161,6 @@ if __name__ == "__main__":
 
             if args.output:
 
-                print("OK")
-
                 # if os.path.isdir(args.output):
                 #     assert os.path.isdir(args.output), args.output
                 #     out_filename = os.path.join(args.output, os.path.basename(path))
