@@ -170,7 +170,8 @@ if __name__ == "__main__":
                 #     out_filename = args.output
 
                 predictions_naa =  predictions_na["sem_seg"].unsqueeze(0)
-                outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
+                # outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
+                outputs_na = torch.max(predictions_naa[0:19, :, :], axis=1)[0]
                 if predictions_na["sem_seg"][19:,:,:].shape[0] > 1:
                     outputs_na_mask = torch.max(predictions_na["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_na_mask[outputs_na_mask < 0.5] = 0
@@ -195,7 +196,8 @@ if __name__ == "__main__":
                 outputs_lr = np.flip(outputs_lr.squeeze(), 1)
 
                 
-                outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
+                # outputs = np.expand_dims((outputs_lr + outputs_na )/2.0, 0).astype(np.float32)
+                outputs = np.expand_dims(outputs_na, 0).astype(np.float32)
                 pathGT = path.replace("images", "labels_masks")                
 
                 if "RoadObsticle21" in pathGT:
