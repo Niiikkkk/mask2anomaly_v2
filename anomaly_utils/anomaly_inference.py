@@ -70,20 +70,20 @@ def get_parser():
     parser = argparse.ArgumentParser(description="maskformer2 demo for builtin configs")
     parser.add_argument(
         "--config-file",
-        default="/home/shyam/Mask2Former/configs/cityscapes/semantic-segmentation/test_unk_na.yaml",
+        default="../configs/cityscapes/semantic-segmentation/maskformer2_R50_bs16_90k.yaml",
         metavar="FILE",
         help="path to config file",
     )
     parser.add_argument(
         "--input",
-        default="/home/shyam/Mask2Former/unk-eval/RoadObsticle21/images/*.webp",
+        default="/Users/nicholas.berardo/Desktop/RoadAnomaly/images/*.jpg",
         nargs="+",
         help="A list of space separated input images; "
         "or a single glob pattern such as 'directory/*.jpg'",
     )
     parser.add_argument(
         "--output",
-        default="/home/shyam/Mask2Former/unk-eval/results/",
+        default="/Users/nicholas.berardo/Desktop/results",
         help="A file or directory to save output visualizations. "
         "If not given, will show output in an OpenCV window.",
     )
@@ -114,12 +114,12 @@ if __name__ == "__main__":
 
     file_path = os.path.join(args.output, 'results.txt')
     
-    if not os.path.exists(file_path):
-        open(file_path, 'w').close()
-    file = open(file_path, 'a')
-
-    # ADDED BY ME
-    file.write(args.input[0].split('/')[4])
+    # if not os.path.exists(file_path):
+    #     open(file_path, 'w').close()
+    # file = open(file_path, 'a')
+    #
+    # # ADDED BY ME
+    # file.write(args.input[0].split('/')[4])
 
 
     
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     if args.input:
 
-        for path in glob.glob(os.path.expanduser(args.input[0])):
+        for path in glob.glob(os.path.expanduser(args.input)):
 
             img = read_image(path, format="BGR")
             start_time = time.time()
@@ -143,6 +143,7 @@ if __name__ == "__main__":
             
             predictions_na, _ = demo.run_on_image(img)
             predictions_lr, _ = demo.run_on_image(img_lr)
+
 
             logger.info(
                 "{}: {} in {:.2f}s".format(
@@ -161,12 +162,12 @@ if __name__ == "__main__":
 
 
 
-                if os.path.isdir(args.output):
-                    assert os.path.isdir(args.output), args.output
-                    out_filename = os.path.join(args.output, os.path.basename(path))
-                else:
-                    assert len(args.input) == 1, "Please specify a directory with args.output"
-                    out_filename = args.output
+                # if os.path.isdir(args.output):
+                #     assert os.path.isdir(args.output), args.output
+                #     out_filename = os.path.join(args.output, os.path.basename(path))
+                # else:
+                #     assert len(args.input) == 1, "Please specify a directory with args.output"
+                #     out_filename = args.output
 
                 predictions_naa =  predictions_na["sem_seg"].unsqueeze(0)
                 outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
@@ -219,22 +220,19 @@ if __name__ == "__main__":
                     ood_gts = np.where((ood_gts<20), 0, ood_gts)
                     ood_gts = np.where((ood_gts==255), 1, ood_gts)
 
-                print(np.unique(ood_gts))
-                sys.stdout.flush()
-
+                print(ood_gts.shape)
+                print(outputs.shape)
                 if 1 not in np.unique(ood_gts):
                     continue              
                 else:
                      ood_gts_list.append(np.expand_dims(ood_gts, 0))
                      anomaly_score_list.append(outputs)
 
-    file.write( "\n")
+    # file.write( "\n")
     ood_gts = np.array(ood_gts_list)
-    print(ood_gts[0].shape)
-    print(np.unique(ood_gts[0]))
+
     anomaly_scores = np.array(anomaly_score_list)
-    print(anomaly_scores[0].shape)
-    print(np.unique(anomaly_scores[0]))
+
 
     # drop void pixels
     ood_mask = (ood_gts == 1)
@@ -258,5 +256,5 @@ if __name__ == "__main__":
     print(f'AUPRC score: {prc_auc}')
     print(f'FPR@TPR95: {fpr}')
 
-    file.write(('AUPRC score:' + str(prc_auc) + '   FPR@TPR95:' + str(fpr) + '\n'))
-    file.close()
+    # file.write(('AUPRC score:' + str(prc_auc) + '   FPR@TPR95:' + str(fpr) + '\n'))
+    # file.close()
