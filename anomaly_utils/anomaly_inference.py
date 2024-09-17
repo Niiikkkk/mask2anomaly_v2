@@ -169,6 +169,7 @@ if __name__ == "__main__":
                 # outputs_na = 1 - torch.max(predictions_naa[0:19,:,:], axis = 1)[0]
                 outputs_na = torch.max(predictions_naa[0:19, :, :], axis=1)[0]
                 if predictions_na["sem_seg"][19:,:,:].shape[0] > 1:
+                    print("OK")
                     outputs_na_mask = torch.max(predictions_na["sem_seg"][19:,:,:].unsqueeze(0),  axis = 1)[0]
                     outputs_na_mask[outputs_na_mask < 0.5] = 0
                     outputs_na_mask[outputs_na_mask >= 0.5] = 1
