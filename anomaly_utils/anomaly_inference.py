@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
     if args.input:
 
-        for path in glob.glob(os.path.expanduser(args.input)):
+        for path in glob.glob(os.path.expanduser(args.input[0])):
 
             img = read_image(path, format="BGR")
             start_time = time.time()
@@ -220,8 +220,6 @@ if __name__ == "__main__":
                     ood_gts = np.where((ood_gts<20), 0, ood_gts)
                     ood_gts = np.where((ood_gts==255), 1, ood_gts)
 
-                print(ood_gts.shape)
-                print(outputs.shape)
                 if 1 not in np.unique(ood_gts):
                     continue              
                 else:
