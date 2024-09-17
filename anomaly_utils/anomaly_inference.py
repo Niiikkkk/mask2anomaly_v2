@@ -144,9 +144,6 @@ if __name__ == "__main__":
             predictions_na, _ = demo.run_on_image(img)
             predictions_lr, _ = demo.run_on_image(img_lr)
 
-            print(predictions_na)
-
-
             logger.info(
                 "{}: {} in {:.2f}s".format(
                     path,
