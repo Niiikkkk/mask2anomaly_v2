@@ -6,7 +6,7 @@ MODEL:
     NORM: "BN"
   SEM_SEG_HEAD:
     NAME: "MaskFormerHead"
-    IGNORE_VALUE: 255 
+    IGNORE_VALUE: 255
     NUM_CLASSES: 19
     LOSS_WEIGHT: 1.0
     CONVS_DIM: 256
